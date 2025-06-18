@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sahgal Properties</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+    <style>
+        body {
+            background: linear-gradient(120deg, #56ccf2, #2f80ed);
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-label {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #444;
+        }
+
+        .form-control {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #2f80ed;
+            font-size: 0.95rem;
+            width: 100%;
+            margin-top: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-control:focus {
+            border-color: #2f80ed;
+            box-shadow: 0 0 8px rgba(47, 128, 237, 0.5);
+            outline: none;
+        }
+
+        .btn-submit {
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            background-color: #2f80ed;
+            border: none;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #1a5ecc;
+            transform: scale(1.03);
+        }
+
+        .prediction-box {
+            margin-top: 25px;
+            padding: 12px;
+            background-color: #3bc9db;
+            color: #0a3d62;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                max-width: 90%;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Property Price Prediction</h1>
+        <div class="form-title">Enter Property Details</div>
+
+        <form action="/predict" method="POST">
+            <div class="form-group">
+                <label for="size" class="form-label">Size (sq ft):</label>
+                <input type="number" class="form-control" id="size" name="size" required min="0" step="any" placeholder="e.g. 1500" />
+            </div>
+
+            <div class="form-group">
+                <label for="bedrooms" class="form-label">Number of Bedrooms:</label>
+                <input type="number" class="form-control" id="bedrooms" name="bedrooms" required min="0" placeholder="e.g. 3" />
+            </div>
+
+            <div class="form-group">
+                <label for="bathrooms" class="form-label">Number of Bathrooms:</label>
+                <input type="number" class="form-control" id="bathrooms" name="bathrooms" required min="0" placeholder="e.g. 2" />
+            </div>
+
+            <button type="submit" class="btn-submit">Predict Price</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="prediction-box">
+                <h4>{{ prediction_text }}</h4>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
